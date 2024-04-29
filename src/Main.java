@@ -6,7 +6,7 @@ public class Main {
         //RomanToInteger roman = new RomanToInteger();
         //System.out.println(roman.romanToInt("MCMXCIV"));
         ValidParentheses validParentheses = new ValidParentheses();
-        System.out.println(validParentheses.isValid("()[]{}"));
+        System.out.println(validParentheses.isValid("[[[]"));
 
     }
 

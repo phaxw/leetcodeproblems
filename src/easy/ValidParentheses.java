@@ -1,48 +1,54 @@
 package easy;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Stack;
 
 public class ValidParentheses {
 
     public boolean isValid(String s) {
 
-        boolean resultado = true;
         Stack<Character> e = new Stack<>();
+        Character character = '0';
 
-        for (int i = 0; i < s.length() - 1; i++) {
-            e.push(s.charAt(i));
+        if ((s.length() % 2) != 0) {
+            return false;
         }
-        Character a;
-        Character b;
-        for (int i = e.size()-1; i > 0; i--) {
-            a = e.get(i);
-            b = e.peek();
-            switch (a) {
+
+        for (int i = 0; i < s.length(); i++) {
+
+            if (s.charAt(i) == '(' || s.charAt(i) == '[' || s.charAt(i) == '{') {
+                e.push(s.charAt(i));
+                continue;
+            }
+
+            if (e.isEmpty()) {
+                return false;
+            }
+
+            switch (s.charAt(i)) {
                 case ')':
-                    if (e.peek() == '(') {
-                        e.pop();
-                    } else {
+                    character = e.pop();
+                    if (character != '(')
                         return false;
-                    }
                     break;
                 case '}':
-                    if (e.peek() == '}') {
-                        e.pop();
-                    } else {
+                    character = e.pop();
+                    if (character != '{')
                         return false;
-                    }
                     break;
                 case ']':
-
-                    if (e.peek() == ']') {
-                        e.pop();
-                    } else {
+                    character = e.pop();
+                    if (character != '[')
                         return false;
-                    }
                     break;
             }
         }
 
-        return resultado;
+        if (!e.isEmpty()) {
+            return false;
+        }
+
+        return true;
     }
 }
